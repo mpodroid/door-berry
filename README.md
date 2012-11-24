@@ -5,7 +5,8 @@ This project is about implementing an IP Video Door Bell System based on Raspber
 
 Main components are:
 * Raspberry PI with Raspbian OS
-* VoIP client: yet to be choosen
+* PjSIP client on Raspberry
+* Smartphones/tablet  as internal station: VoIP client yet to be choosen
 * Asterisk PBX: not strictly required but necessary to be able to scale system easily to multiple external and internal stations
 
 
