@@ -1,0 +1,3 @@
+There are currently performances issue with USB bus. Changing speed solve it
+
+Add "dwc_otg.speed=1" in file /boot/cmdline.txt
