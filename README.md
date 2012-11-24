@@ -1,7 +1,7 @@
 DOOR-BERRY
 ==========
 
-This project is about implementing an IP Video Door Bell System based on Raspberry PI.
+This project is about implementing an IP Video Door Bell and Intercom System based on Raspberry PI.
 
 Main components are:
 * Raspberry PI with Raspbian OS
