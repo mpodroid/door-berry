@@ -11,11 +11,7 @@ write() {
   echo $2 > /sys/class/gpio/$PORT/value
 }
 
-#echo 23  > /sys/class/gpio/export 
-#echo out > direction 
-#echo 23 > unexport 
-
-#echo "rele.sh $*" > /tmp/rele.log
+echo "rele.sh $*" > /tmp/rele.log
 
 if [ $# -eq 0 ]; then
 	echo "$0 gpioX"
