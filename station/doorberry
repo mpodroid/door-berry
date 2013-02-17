@@ -1,0 +1,25 @@
+#!/usr/bin/python
+
+import os
+import sys
+import lockfile
+import daemon
+from station import DoorBerry
+
+ctx = daemon.DaemonContext()
+
+#pid = str(os.getpid())
+#print "PID ", pid
+#pidfile = "/var/run/doorberry.pid"
+#file(pidfile, 'w').write(pid)
+#print "after write"
+
+with ctx:
+    pid = str(os.getpid())
+    file('/var/run/doorberry.pid', 'w').write(pid)
+    db = DoorBerry()
+    db.run()
+    print "db.run"
+print "pre ctx.run"
+ctx.run()
+print "ctx.run"
