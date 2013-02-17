@@ -1,9 +1,10 @@
+#!/usr/bin/python
+
 import pjsua as pj
 import threading
 import datetime
 from keypad import RaspiBoard
 import time
-import os
 
 LOG_LEVEL_PJSIP = 3
 SIP_SERVER="192.168.1.10"
@@ -54,6 +55,10 @@ class DBAccountCallback(pj.AccountCallback):
         if self.sem:
             if self.account.info().reg_status >= 200:
                 self.sem.release()
+    def on_incoming_call(self, call):
+        cb = DBCallCallback(call)
+        call.set_callback(cb)
+        call.answer(200,'')
 
 class DoorStation:
     lib = None
@@ -67,11 +72,11 @@ class DoorStation:
         try:
             ua= pj.UAConfig()
             ua.user_agent = "DoorBerry UA"
-            #ua.max_calls = 4
+            #ua.max_calls = 1
        
             mc = pj.MediaConfig()
-            mc.no_vad = True
-            mc.ec_tail_len = 0 
+#            mc.no_vad = False
+#            mc.ec_tail_len = 800 
             mc.clock_rate = 8000
 
             lib.init(ua_cfg = ua, log_cfg = pj.LogConfig(level=LOG_LEVEL_PJSIP, callback=pj_log), media_cfg=mc)
@@ -115,11 +120,9 @@ class DoorStation:
     def call(self):
         if (self._call != None and self._call.is_valid()):
             print "call in progress -> SKIP"
-            self.play_fail()
             return
 
         self._call = self.acc.make_call("sip:100@"+SIP_SERVER, DBCallCallback())
-        self.play_success()
     
     def stop(self):
         try:
@@ -129,32 +132,37 @@ class DoorStation:
         except pj.Error, e:
             log("Exception: " + str(e))
     
-    def play_fail(self):
-        os.system('aplay fail.wav')
-        
-    def play_success(self):
-        os.system('aplay success.wav')
-
-try:
-    station = DoorStation()
-    station.start()
-    keyboard = RaspiBoard()
+class DoorBerry:
     
-    while True:
-        key = keyboard.keyPressed()
-        if(key == 0): 
-            time.sleep(0.2)
-            continue
+    station = None
+    keyboard = None    
+    
+    def __init__(self):
+        self.station = DoorStation()
+        self.keyboard = RaspiBoard()
+
+    def run(self):
+        try:
+            #station = DoorStation()
+            self.station.start()
+            #keyboard = RaspiBoard()
+   
+            log("entering main loop") 
+            while True:
+                key = self.keyboard.keyPressed()
+                if(key == 0): 
+                    time.sleep(0.2)
+                    continue
+       
+                log("Selected extension =" + str(key))
         
-        log("Selected extension =" + str(key))
-        
-        if(key ==  1):
-            try:
-                log("calling extension 1")
-                station.call()
-            except pj.Error, ee:
-                print ee
-            time.sleep(2)
+                if(key ==  1):
+                    try:
+                        log("calling extension 1")
+                        self.station.call()
+                    except pj.Error, ee:
+                        print ee
+                    time.sleep(2)
                 
-except Exception, e:
-    print e
+        except Exception, e:
+            print e
