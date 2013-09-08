@@ -1,6 +1,6 @@
 #!/bin/bash
 
-raspi-config
+sudo raspi-config
 
 echo "* Update OS"
 sudo apt-get update
