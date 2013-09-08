@@ -7,21 +7,23 @@ sudo apt-get install alsaplayer-alsa python2.7-dev python-daemon python-lockfile
 echo "* Download & Compile dependencies"
 cd
 mkdir tmp
-cd $HOME/tmp
-wget http://www.libsdl.org/tmp/SDL-2.0.tar.gz
-tar xvfz SDL-2.0.tar.gz
-cd SDL-2.0.0-*
-./configure
-make
-sudo make install
 
-cd $HOME/tmp
-wget http://ffmpeg.org/releases/ffmpeg-0.10.7.tar.bz2
-tar xvfj ffmpeg-0.10.7.tar.bz2
-cd ffmpeg-0.10.7
-./configure --enable-shared --disable-static --enable-memalign-hack --enable-gpl --enable-libx264
-make
-sudo make install
+# required for video support
+#cd $HOME/tmp
+#wget http://www.libsdl.org/tmp/SDL-2.0.tar.gz
+#tar xvfz SDL-2.0.tar.gz
+#cd SDL-2.0.0-*
+#./configure
+#make
+#sudo make install
+#
+#cd $HOME/tmp
+#wget http://ffmpeg.org/releases/ffmpeg-0.10.7.tar.bz2
+#tar xvfj ffmpeg-0.10.7.tar.bz2
+#cd ffmpeg-0.10.7
+#./configure --enable-shared --disable-static --enable-memalign-hack --enable-gpl --enable-libx264
+#make
+#sudo make install
 
 cd $HOME/tmp
 wget http://www.pjsip.org/release/2.1/pjproject-2.1.tar.bz2
