@@ -10,7 +10,7 @@ mkdir tmp
 cd $HOME/tmp
 wget http://www.libsdl.org/tmp/SDL-2.0.tar.gz
 tar xvfz SDL-2.0.tar.gz
-cd SDL-2.0.0-7125/
+cd SDL-2.0.0-*
 ./configure
 make
 sudo make install
