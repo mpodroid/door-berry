@@ -1,7 +1,5 @@
 #!/bin/bash
 
-sudo raspi-config
-
 echo "* Update OS"
 sudo apt-get update
 sudo apt-get upgrade
