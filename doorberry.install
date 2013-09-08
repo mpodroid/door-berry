@@ -1,0 +1,18 @@
+#!/bin/bash
+
+echo "*  Clone Door-berry repository"
+cd $HOME
+git clone https://github.com/mpodroid/door-berry.git 
+
+echo "* Configure asterisk"
+sudo /etc/init.d/asterisk stop
+sudo rm /etc/asterisk/*
+sudo cp door-berry/asterisk/cfg/* /etc/asterisk/
+sudo chown asterisk.asterisk /etc/asterisk/*.conf
+sudo chmod 640 /etc/asterisk/*.conf
+sudo /etc/init.d/asterisk start
+
+echo "* Install door-berry service"
+sudo cp door-berry/service/doorberry /etc/init.d/
+sudo update-rc.d doorberry start 10 2 3 4 5
+sudo update-rc.d doorberry stop 10 0 1 6 
