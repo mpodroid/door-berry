@@ -20,7 +20,7 @@
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="DoorBerry VoIP intercom"
 NAME=doorberry
-DAEMON=/home/pi/door/$NAME
+DAEMON=/home/pi/door-berry/$NAME
 DAEMON_ARGS="" # "--options args"
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/doorberry
