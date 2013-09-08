@@ -9,4 +9,11 @@ Main components are:
 * Smartphones/tablet  as internal station: VoIP client yet to be choosen
 * Asterisk PBX: not strictly required but necessary to be able to scale system easily to multiple external and internal stations
 
+BUILDING
+========
+
+There 3 scripts to guide you and automate the preparation and build process:
+* doorberry.prepare: run it to update default image OS and firmware
+* doorberry.install-dep: run it to download and build dependencies required
+* doorberry.install: run it to actually install doorberry
 
