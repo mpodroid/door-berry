@@ -38,7 +38,7 @@ PJ
 make dep
 make
 sudo make install
-pjsip-apps/src/python
+cd pjsip-apps/src/python
 make
 sudo make install
 
